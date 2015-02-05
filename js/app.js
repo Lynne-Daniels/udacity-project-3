@@ -18,8 +18,8 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     if (this.x < 505){
-    	this.x++;
-    }else {this.x = 0;}
+    	this.x = (this.x + dt*75);
+    }else {this.x = -100;}
 };
 
 // Draw the enemy on the screen, required method for game
@@ -40,7 +40,7 @@ Enemy.prototype.render = function() {
 var allEnemies = [];
 //one bug each line.  complicated math makes them line up one on each row
 	for (var index = 0; index < 3; index++) {
-   		allEnemies[index] = new Enemy(0, ((index+1)*55)+(index*30));
+   		allEnemies[index] = new Enemy(-100, ((index+1)*55)+(index*30));
 }
 
 var player = {sprite:'images/char-princess-girl.png',
@@ -51,16 +51,27 @@ var player = {sprite:'images/char-princess-girl.png',
     				ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 				},
 				src: 'images/char-princess-girl.png',
-				handleInput: function(){}
+				handleInput: function(direction){
+					console.log(direction);
+					if (direction === "up"){
+									player.y = player.y - 83;
+									console.log(direction);
+									console.log(player.y);
+								}
+					else if (direction === "down"){
+							player.y = player.y + 83;	
+								}			
+					else if (direction === "right"){
+							player.x = player.x + 101;	
+								}
+					else if (direction === "left"){
+							player.x = player.x - 101;	
+								}
+				}
+		
 };
 
-/*/example of image that worked
-window.onload = function() {
-  var canvas = document.getElementById("e");
-  var context = canvas.getContext("2d");
-  var cat = document.getElementById("cat");
-  context.drawImage(cat, 0, 0);
-};*/
+
 
 
 /********************End stuff Lynne Adds*******************/
