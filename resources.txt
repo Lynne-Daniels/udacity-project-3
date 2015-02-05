@@ -39,3 +39,5 @@ http://phrogz.net/js/classes/OOPinJS2.html
 
 http://stackoverflow.com/questions/3923596/git-windows-command-prompt-gets-stuck-during-git-commands-with-end
 
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for
+

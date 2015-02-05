@@ -1,13 +1,13 @@
 // Enemies our player must avoid
-var Enemy = function() {
+var Enemy = function(startX, startY) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    this.x = 0;
-    this.y = 60;
+    this.x = startX;
+    this.y = startY;
     
 };
 
@@ -17,6 +17,9 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    if (this.x < 505){
+    	this.x++;
+    }else {this.x = 0;}
 };
 
 // Draw the enemy on the screen, required method for game
@@ -34,7 +37,12 @@ Enemy.prototype.render = function() {
 // Place the player object in a variable called player
 /********************Begin stuff Lynne Adds*******************/
 
-var allEnemies = [new Enemy(), new Enemy()];
+var allEnemies = [];
+//one bug each line.  complicated math makes them line up one on each row
+	for (var index = 0; index < 3; index++) {
+   		allEnemies[index] = new Enemy(0, ((index+1)*55)+(index*30));
+}
+
 var player = {sprite:'images/char-princess-girl.png',
 				x: 200,
 				y: 410,
