@@ -1,0 +1,41 @@
+Project Three Resources
+
+Udacity OOJS and HTML5 Canvas course
+Udacity Office Hours
+https://plus.google.com/u/0/events/cnoi8huerhdgpgde1umpkn97rlg
+bug size, player size --> size to top of background image.  Remap row 1, row 2 etc, 70 - 80 px?
+give player y step size and x step size.  play with step size until lands on box.
+
+Frogger game notes:  https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/edit#
+
+https://plus.google.com/u/0/events/cupbs3pbne7qkuqok4g0ldhntic?authkey=COGW25b5jbv3-AE
+Gave good overview of how it all works.
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain
+
+to create an inheriting object:
+
+var obj1 = {};
+var obj2 = Object.create(obj1)
+//obj1 is prototype of obj2 and any function of obj1 that uses "this" will refer to whichever called it
+//changes to obj1 will be looked up on obj2 if obj2 is not assigned its own value
+creating a constructed object
+
+var obj1 = {};
+var obj2 = New obj1();
+/		/ i think obj2 inherits just the values of obj1 at the time of assignment, but then keeps its own copy.
+//changes to obj1 never looked up by obj2?
+
+Now just trying to solve this in order of error messages. Used:
+
+http://www.html5canvastutorials.com/tutorials/html5-canvas-images/
+
+to see what ctx.drawImage wants.
+http://www.reddit.com/r/javascript/comments/2hu7q5/trying_to_drawimage_a_copy_of_an_image_object/
+
+another lesson in objects:
+
+http://phrogz.net/js/classes/OOPinJS2.html
+
+http://stackoverflow.com/questions/3923596/git-windows-command-prompt-gets-stuck-during-git-commands-with-end
+
