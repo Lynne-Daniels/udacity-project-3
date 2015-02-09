@@ -45,7 +45,7 @@ var allEnemies = [];
 
 var player = {sprite:'images/char-princess-girl.png',
 				x: 200,
-				y: 410,
+				y: 415,
 				update: function(dt){},
 				render:function(){
     				ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -53,10 +53,21 @@ var player = {sprite:'images/char-princess-girl.png',
 				src: 'images/char-princess-girl.png',
 				handleInput: function(direction){
 					console.log(direction);
+		//Dont allow player to leave the canvas
+				if (((player.y < 83) && (direction === "up"))||
+					((player.y > 414) && (direction === "down"))||
+					((player.x < 0) && (direction === "left"))||
+					((player.x > 400) && (direction === "right")))
+
+				{
+					return;//out of bounds move requested, not allowed
+				}
+					
+		//Move the player one space per arrow key used			
 					if (direction === "up"){
-									player.y = player.y - 83;
-									console.log(direction);
-									console.log(player.y);
+							player.y = player.y - 83;
+							console.log(direction);
+							console.log(player.y);
 								}
 					else if (direction === "down"){
 							player.y = player.y + 83;	
