@@ -8,6 +8,11 @@ var Enemy = function(startX, startY) {
     this.sprite = 'images/enemy-bug.png';
     this.x = startX;
     this.y = startY;
+    this.collide = function(){
+		if ((this.y > player.y - 30) && (this.y < player.y + 30)){
+		console.log("COLLISION");
+		}
+    };
     
 };
 
@@ -18,7 +23,8 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     if (this.x < 505){
-    	this.x = (this.x + dt*75);
+		this.x = (this.x + dt*75);
+		this.collide();
     }else {this.x = -100;}
 };
 
@@ -41,6 +47,7 @@ var allEnemies = [];
 //one bug each line.  complicated math makes them line up one on each row
 	for (var index = 0; index < 3; index++) {
    		allEnemies[index] = new Enemy(-100, ((index+1)*55)+(index*30));
+   		console.log(allEnemies[index].y);
 }
 
 var player = {sprite:'images/char-princess-girl.png',
@@ -62,6 +69,8 @@ var player = {sprite:'images/char-princess-girl.png',
 				{
 					return;//out of bounds move requested, not allowed
 				}
+				
+				
 					
 		//Move the player one space per arrow key used			
 					if (direction === "up"){
