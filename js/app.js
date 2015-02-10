@@ -9,11 +9,13 @@ var Enemy = function(startX, startY) {
     this.x = startX;
     this.y = startY;
     this.collide = function(){
-		if ((this.y > player.y - 30) && (this.y < player.y + 30)){
-		console.log("COLLISION");
+		if (((this.y > player.y - 30) && (this.y < player.y + 30))&&
+		((this.x > player.x - 50) && (this.x < player.x + 30)))
+		{
+		player.x = 200;
+		player.y = 415;
 		}
     };
-    
 };
 
 // Update the enemy's position, required method for game
@@ -25,41 +27,36 @@ Enemy.prototype.update = function(dt) {
     if (this.x < 505){
 		this.x = (this.x + dt*75);
 		this.collide();
-    }else {this.x = -100;}
+    }else {this.x = Math.floor(Math.random() * (-600)) - 100;}// recycle bugs to stage left
 };
 
 // Draw the enemy on the screen, required method for game
+
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
+// Now instantiate your objects.
+// Place all enemy objects in an array called allEnemies
+// Place the player object in a variable called player
 
+var allEnemies = [];
+//one bug each line.  complicated math makes them line up one on each row with a starting x between -100 and -500
+	for (var index = 0; index < 3; index++) {
+   		allEnemies[index] = new Enemy(Math.floor(Math.random() * (-600)) - 100, ((index+1)*55)+(index*30));
+}
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
 
-
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
-/********************Begin stuff Lynne Adds*******************/
-
-var allEnemies = [];
-//one bug each line.  complicated math makes them line up one on each row
-	for (var index = 0; index < 3; index++) {
-   		allEnemies[index] = new Enemy(-100, ((index+1)*55)+(index*30));
-   		console.log(allEnemies[index].y);
-}
-
 var player = {sprite:'images/char-princess-girl.png',
 				x: 200,
 				y: 415,
-				update: function(dt){},
+				update: function(dt){},//sometimes after assembly, there are extra parts.  This function does not do anything.
 				render:function(){
     				ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 				},
 				src: 'images/char-princess-girl.png',
 				handleInput: function(direction){
-					console.log(direction);
 		//Dont allow player to leave the canvas
 				if (((player.y < 83) && (direction === "up"))||
 					((player.y > 414) && (direction === "down"))||
@@ -69,14 +66,9 @@ var player = {sprite:'images/char-princess-girl.png',
 				{
 					return;//out of bounds move requested, not allowed
 				}
-				
-				
-					
 		//Move the player one space per arrow key used			
 					if (direction === "up"){
 							player.y = player.y - 83;
-							console.log(direction);
-							console.log(player.y);
 								}
 					else if (direction === "down"){
 							player.y = player.y + 83;	
@@ -88,13 +80,8 @@ var player = {sprite:'images/char-princess-girl.png',
 							player.x = player.x - 101;	
 								}
 				}
-		
 };
 
-
-
-
-/********************End stuff Lynne Adds*******************/
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
