@@ -48,6 +48,8 @@ var allEnemies = [];
 // This class requires an update(), render() and
 // a handleInput() method.
 
+/*Working version of player, but did not meet specifications because she is not an object;-P
+ See new version below
 var player = {sprite:'images/char-princess-girl.png',
 				x: 200,
 				y: 415,
@@ -81,6 +83,47 @@ var player = {sprite:'images/char-princess-girl.png',
 								}
 				}
 };
+*/
+
+var Player = function(playerimage) {
+
+    this.sprite = playerimage;
+    this.x = 200;
+    this.y = 415;
+
+    };
+
+var player = new Player('images/char-princess-girl.png');
+				
+	Player.prototype.update = function(dt){},//sometimes after assembly, there are extra parts.  This function does not do anything.
+	Player.prototype.render = function(){
+    	ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+				},
+	
+	player.handleInput = function(direction){
+		//Dont allow player to leave the canvas
+				if (((player.y < 83) && (direction === "up"))||
+					((player.y > 414) && (direction === "down"))||
+					((player.x < 0) && (direction === "left"))||
+					((player.x > 400) && (direction === "right")))
+
+				{
+					return;//out of bounds move requested, not allowed
+				}
+		//Move the player one space per arrow key used			
+					if (direction === "up"){
+							player.y = player.y - 83;
+								}
+					else if (direction === "down"){
+							player.y = player.y + 83;	
+								}			
+					else if (direction === "right"){
+							player.x = player.x + 101;	
+								}
+					else if (direction === "left"){
+							player.x = player.x - 101;	
+								}
+			};
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
